@@ -20,7 +20,7 @@ createRoot(document.getElementById("root")).render(
       </a>{" "}
       and is
       <a
-        href="https://github.com/shecodi/South-African-Peom-Generator"
+        href="https://github.com/shecodi/abijah-react-weather-app/tree/main/src"
         class="link"
         target="_blank"
       >
