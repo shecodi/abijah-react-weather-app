@@ -2,9 +2,8 @@ import { useState } from "react";
 import "./App.css";
 import axios from "axios";
 
+
 function App() {
-
-
 
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
@@ -16,15 +15,15 @@ function App() {
    fetch(url)
      .then((response) => response.json())
      .then((data) => {
-      setWeather({
-        temperature: data.main.temp,
-        condition: data.weather[0].description,
-        city: data.name,
-        humidity: data.main.humidity,
-        wind: data.wind.speed,
-        feelsLike: data.main.feels_like,
-        time: data.dt,
-      });
+       setWeather({
+         temperature: data.main.temp,
+         condition: data.weather[0].description,
+         city: data.name,
+         humidity: data.main.humidity,
+         wind: data.wind.speed,
+         feelsLike: data.main.feels_like,
+         time: data.dt,
+       });
      });
  }
 
