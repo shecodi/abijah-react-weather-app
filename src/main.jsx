@@ -10,14 +10,8 @@ createRoot(document.getElementById("root")).render(
     <br />
 
     <footer>
-      This AI project was coded by
-      <a
-        href="https://github.com/shecodi/abijah-react-weather-app"
-        class="link"
-        target="_blank"
-      >
-        Abijah God'swill Kutwane
-      </a>{" "}
+      This was coded by Abijah God'swill Kutwane
+      
       and is
       <a
         href="https://github.com/shecodi/abijah-react-weather-app/tree/main/src"
