@@ -1,29 +1,34 @@
 import { useState } from "react";
 import "./App.css";
 import axios from "axios";
+import WeatherIcon from "../WeatherIcon";
+import { searchWeather } from "../weatherService";
 
 function App() {
 
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
 
-function searchWeather() {
-  const apiKey = "efa9d0bfea1a536aaa9c77e4bedcbb45";
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.trim()}&appid=${apiKey}&units=metric`;
+function handleSearch() {
+  searchWeather(city).then((data) => {
+    if (data.cod !== 200) {
+      alert("City not found ❌");
+      return;
+    }
 
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      setWeather({
-        temperature: data.main.temp,
-        condition: data.weather[0].description,
-        city: data.name,
-        humidity: data.main.humidity,
-        wind: data.wind.speed,
-        feelsLike: data.main.feels_like,
-        time: data.dt,
-      });
-    });
+   setWeather({
+     temperature: data.main.temp,
+     condition: data.weather[0].description,
+     city: data.name,
+     humidity: data.main.humidity,
+     wind: data.wind.speed,
+     feelsLike: data.main.feels_like,
+     time: data.dt,
+     icon: data.weather[0].icon, // 👈 ADD THIS
+   });
+
+  
+  });
 }
 
 function formatTime(timestamp) {
@@ -38,7 +43,14 @@ function toFahrenheit(celsius) {
 
   return (
     <div>
-      <h1>Weather App 🌤️</h1>
+      <h1>
+        Weather App{" "}
+        <img
+          src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+          alt="weather icon"
+          style={{ width: "100px" }}
+        />
+      </h1>
 
       <input
         type="text"
@@ -47,7 +59,7 @@ function toFahrenheit(celsius) {
         onChange={(e) => setCity(e.target.value)}
       />
 
-      <button onClick={searchWeather}>Search Weather</button>
+      <button onClick={handleSearch}>Search Weather</button>
 
       {weather && (
         <div>
@@ -56,8 +68,14 @@ function toFahrenheit(celsius) {
             {Math.round(weather.temperature)}°C /{" "}
             {toFahrenheit(weather.temperature)}°F
           </p>
-          <p>{weather.condition}</p>
-
+          <p>
+            <img
+              src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+              alt="weather icon"
+              style={{ width: "100px" }}
+            />
+            {weather.condition}
+          </p>
           <p>
             Feels like: {Math.round(weather.feelsLike)}°C /{" "}
             {toFahrenheit(weather.feelsLike)}°F
