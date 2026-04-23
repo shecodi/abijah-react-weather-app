@@ -2,9 +2,10 @@ import React from "react";
 import WeatherIcon from "./WeatherIcon";
 import "./WeatherCard.css";
 
-function WeatherCard({ weather, toFahrenheit, formatTime }) {
+function WeatherCard({ weather, toFahrenheit, formatTime , getDay}) {
   return (
     <div className="card">
+      <p className="day">{getDay(weather.time)}</p>
       <h2>{weather.city}</h2>
 
       <WeatherIcon condition={weather.condition} />
