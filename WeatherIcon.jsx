@@ -1,18 +1,15 @@
 import React from "react";
-
+import { WiDaySunny, WiCloud, WiRain } from "react-icons/wi";
 
 function WeatherIcon({ condition }) {
-  function getWeatherIcon() {
-    if (condition.includes("cloud")) return "☁️";
-    if (condition.includes("rain")) return "🌧️";
-    if (condition.includes("clear")) return "☀️";
-    if (condition.includes("snow")) return "❄️";
-    if (condition.includes("thunder")) return "⛈️";
+  const text = condition.toLowerCase();
 
-    return "🌤️";
-  }
+  if (text.includes("cloud")) return <WiCloud size={50} />;
+  if (text.includes("rain")) return <WiRain size={50} />;
+  if (text.includes("clear")) return <WiDaySunny size={50} />;
 
-  return <span>{getWeatherIcon()}</span>;
+  return <WiDaySunny size={50} />;
 }
+
 
 export default WeatherIcon; 

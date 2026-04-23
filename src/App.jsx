@@ -3,18 +3,27 @@ import "./App.css";
 import axios from "axios";
 import WeatherIcon from "../WeatherIcon";
 import { searchWeather } from "../weatherService";
+import WeatherCard from "../WeatherCard";
 
 function App() {
 
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
 
+  function getDay(timestamp) {
+    const date = new Date(timestamp * 1000);
+    return date.toLocaleDateString("en-US", { weekday: "long" });
+  }
+
 function handleSearch() {
   searchWeather(city).then((data) => {
-    if (data.cod !== 200) {
+    if (data.cod !== 200 && data.cod !== "200") {
       alert("City not found ❌");
       return;
     }
+
+
+
 
    setWeather({
      temperature: data.main.temp,
@@ -45,11 +54,7 @@ function toFahrenheit(celsius) {
     <div>
       <h1>
         Weather App{" "}
-        <img
-          src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-          alt="weather icon"
-          style={{ width: "100px" }}
-        />
+        {weather && <WeatherIcon condition={weather.condition} />}{" "}
       </h1>
 
       <input
@@ -62,28 +67,12 @@ function toFahrenheit(celsius) {
       <button onClick={handleSearch}>Search Weather</button>
 
       {weather && (
-        <div>
-          <h2>{weather.city}</h2>
-          <p>
-            {Math.round(weather.temperature)}°C /{" "}
-            {toFahrenheit(weather.temperature)}°F
-          </p>
-          <p>
-            <img
-              src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-              alt="weather icon"
-              style={{ width: "100px" }}
-            />
-            {weather.condition}
-          </p>
-          <p>
-            Feels like: {Math.round(weather.feelsLike)}°C /{" "}
-            {toFahrenheit(weather.feelsLike)}°F
-          </p>
-          <p>Humidity: {weather.humidity}%</p>
-          <p>Wind: {weather.wind} m/s</p>
-          <p>Time: {formatTime(weather.time)}</p>
-        </div>
+        <WeatherCard
+          weather={weather}
+          toFahrenheit={toFahrenheit}
+          formatTime={formatTime}
+          getDay={getDay}
+        />
       )}
     </div>
   );
