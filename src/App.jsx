@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./App.css";
-import axios from "axios";
-import WeatherIcon from "../WeatherIcon";
+
 import { searchWeather } from "../weatherService";
 import WeatherCard from "../WeatherCard";
+
 
 function App() {
 
@@ -17,26 +17,25 @@ function App() {
 
 function handleSearch() {
   searchWeather(city).then((data) => {
+  
     if (data.cod !== 200 && data.cod !== "200") {
       alert("City not found ❌");
       return;
+
+ 
     }
 
+    setWeather({
+      temperature: data.main.temp,
+      condition: data.weather[0].description,
+      city: data.name,
+      humidity: data.main.humidity,
+      wind: data.wind.speed,
+      feelsLike: data.main.feels_like,
+      time: data.dt,
+      icon: data.weather[0].icon,
+    });
 
-
-
-   setWeather({
-     temperature: data.main.temp,
-     condition: data.weather[0].description,
-     city: data.name,
-     humidity: data.main.humidity,
-     wind: data.wind.speed,
-     feelsLike: data.main.feels_like,
-     time: data.dt,
-     icon: data.weather[0].icon, // 👈 ADD THIS
-   });
-
-  
   });
 }
 
@@ -53,8 +52,7 @@ function toFahrenheit(celsius) {
   return (
     <div>
       <h1>
-        Weather App{" "}
-        {weather && <WeatherIcon condition={weather.condition} />}{" "}
+        Weather App  
       </h1>
 
       <input

@@ -4,21 +4,23 @@ import React from "react";
 export  default function Footer() {
     return (
       <footer>
-        This was coded by Abijah God'swill Kutwane and is
+        This was coded by
         <a
           href="https://github.com/shecodi/abijah-react-weather-app/tree/main/src"
-          class="link"
+          className="link"
           target="_blank"
         >
-          open-sourced on GitHub
+          {" "}
+          Abijah God'swill Kutwane{" "}
         </a>
         and is
+        {""}
         <a
-          href="https://abijah-react-weather-app.netlify.app/ "
-          class="link"
+          href="https://abijah-react-weather-app.netlify.app/"
+          className="link"
           target="_blank"
         >
-          hosted on Netlify
+          {""} open sourced
         </a>
         .
       </footer>
