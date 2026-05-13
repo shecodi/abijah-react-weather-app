@@ -2,7 +2,6 @@ import React from "react";
 import "./WeatherCard.css";
 import ReactAnimatedWeather from "react-animated-weather";
 
-
 function WeatherCard({ weather, toFahrenheit, formatTime , getDay}) {
 
 function getAnimatedIcon(condition) {
@@ -27,18 +26,9 @@ function getBackground(condition) {
   return "#1e293b";
 }
 
-<div
-  style={{
-    background: weather ? getBackground(weather.condition) : "#1e293b",
-    minHeight: "100vh",
-    padding: "20px",
-  }}
-></div>;
+
 
   return (
-
-
-
     <div className="card">
       <p className="day">{getDay(weather.time)}</p>
       <h2>{weather.city}</h2>
@@ -60,6 +50,8 @@ function getBackground(condition) {
         <p>🌬️ {weather.wind} m/s</p>
       </div>
       <p className="time">🕒 {formatTime(weather.time)}</p>
+      
+     
     </div>
   );
 }
