@@ -1,13 +1,24 @@
  .card {
-  background: linear-gradient(135deg, #89c0d1, #9da571);
-  color: white;
+  width: 320px;
+  margin: 30px auto;
   padding: 25px;
-  border-radius: 20px;
-  width: 200px;
-  margin: 20px auto;
+
+  border-radius: 25px;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  backdrop-filter: blur(15px);
+
+  border: 1px solid rgba(255,255,255,0.2);
+
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.25);
+
+  color: white;
+
   text-align: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-  transition: transform 0.3s ease;
+
+  transition: all 0.8s ease;
 }
 
 .card:hover {
