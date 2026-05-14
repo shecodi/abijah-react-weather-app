@@ -1,5 +1,3 @@
-
-
 export function searchWeather(city) {
   const apiKey = "efa9d0bfea1a536aaa9c77e4bedcbb45";
 
@@ -9,9 +7,6 @@ export function searchWeather(city) {
 }
 
 export function getForecast(lat, lon) {
-  const apiKey = "efa9d0bfea1a536aaa9c77e4bedcbb45";
-
-  const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-
+ const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto`;
   return fetch(url).then((response) => response.json());
 }

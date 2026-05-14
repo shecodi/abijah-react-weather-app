@@ -31,25 +31,29 @@ function App() {
         return;
       }
 
-      setWeather({
-        temperature: data.main.temp,
-        condition: data.weather[0].description,
-        city: data.name,
-        humidity: data.main.humidity,
-        wind: data.wind.speed,
-        feelsLike: data.main.feels_like,
-        time: data.dt,
-        icon: data.weather[0].icon,
-        lat: data.coord.lat,
-        lon: data.coord.lon,
-      });
+     setWeather({
+       temperature: data.main.temp,
+       condition: data.weather[0].description,
+       city: data.name,
+       humidity: data.main.humidity,
+       wind: data.wind.speed,
+       feelsLike: data.main.feels_like,
+       time: data.dt,
+       icon: data.weather[0].icon,
+     });
 
-      // ✅ Forecast
-      getForecast(data.coord.lat, data.coord.lon).then((forecastData) => {
-        setForecast(forecastData.daily.slice(0, 7));
-      });
+     getForecast(data.coord.lat, data.coord.lon).then((forecastData) => {
+      setForecast(
+        forecastData.daily.time.map((day, index) => ({
+          day: day,
+          max: forecastData.daily.temperature_2m_max[index],
+          min: forecastData.daily.temperature_2m_min[index],
+          code: forecastData.daily.weathercode[index],
+        })),
+      );
+     });
 
-      setLoading(false);
+     setLoading(false); 
     });
   }
 
@@ -83,6 +87,7 @@ function App() {
       {loading && <div className="spinner"></div>}
 
       {weather && (
+        
         <WeatherCard
           weather={weather}
           toFahrenheit={toFahrenheit}

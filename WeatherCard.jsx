@@ -51,7 +51,6 @@ function getBackground(condition) {
       </div>
       <p className="time">🕒 {formatTime(weather.time)}</p>
       
-     
     </div>
   );
 }

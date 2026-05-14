@@ -1,4 +1,15 @@
-.counter {
+ 
+ .container { 
+
+max-width: 600px;
+margin:0 auto;
+padding: 20px;
+border: #2563eb;
+ }
+
+
+
+ .counter {
   font-size: 16px;
   padding: 5px 10px;
   border-radius: 5px;

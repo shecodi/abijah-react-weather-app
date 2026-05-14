@@ -1,27 +1,41 @@
- import React from "react";
 import "./Forecast.css";
 
- function Forecast({ data }) {
-   function getDay(timestamp) {
-     return new Date(timestamp * 1000).toLocaleDateString("en-US", {
-       weekday: "short",
-     });
-   }
+function Forecast({ data }) {
+  function getDay(dateString) {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      weekday: "short",
+    });
+  }
 
-   return (
-     <div style={{ display: "flex", justifyContent: "space-around" }}>
-       {data.map((day, index) => (
-         <div key={index}>
-           <p>{getDay(day.dt)}</p>
-           <img
-             src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
-             alt=""
-           />
-           <p>{Math.round(day.temp.day)}°C</p>
-         </div>
-       ))}
-     </div>
-   );
- }
+  function getWeatherIcon(code) {
+    if (code === 0) return "☀️";
 
- export default Forecast;
+    if (code <= 3) return "☁️";
+
+    if (code >= 51 && code <= 67) return "🌧️";
+
+    if (code >= 71 && code <= 77) return "❄️";
+
+    if (code >= 95) return "⛈️";
+
+    return "🌤️";
+  }
+
+  return (
+    <div className="forecast-container">
+      {data.map((day, index) => (
+        <div className="forecast-card" key={index}>
+          <p className="forecast-day">{getDay(day.day)}</p>
+
+          <div className="forecast-icon">{getWeatherIcon(day.code)}</div>
+
+          <p className="forecast-temp">{Math.round(day.max)}°</p>
+
+          <p className="forecast-min">{Math.round(day.min)}°</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default Forecast;
