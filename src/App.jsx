@@ -4,12 +4,12 @@ import WeatherCard from "../WeatherCard";
 import Forecast from "../Forecast";
 import { searchWeather, getForecast } from "../weatherService";
 import ForecastChart from "../ForecastChart";
-import ReactAnimatedWeather from "react-animated-weather";
 import Footer from "../footer.jsx";
 import cloudsVideo from "./Videos/Clouds.mp4";
 import rainVideo from "./Videos/Rain.mp4";
 import sunnyVideo from "./Videos/Sunny.mp4";
 import nightVideo from "./Videos/Night.mp4";
+
 
 
 
@@ -145,12 +145,14 @@ function getBackgroundVideo() {
   return (
     <div className="container">
       <video
-       src={getBackgroundVideo()}
+        src={getBackgroundVideo()}
         className="video-cover"
         autoPlay
         muted
         loop
       ></video>
+
+
 
       <div className="content-video">
         <h2>Weather Forecast</h2>
@@ -165,6 +167,8 @@ function getBackgroundVideo() {
         <button onClick={() => handleSearch()}>Search Weather</button>
 
         {loading && <div className="spinner"></div>}
+
+        
 
         {weather && (
           <WeatherCard

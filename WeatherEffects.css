@@ -1,0 +1,40 @@
+
+.weather-icon {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  color: white;
+
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.weather-effect {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  opacity: 0.15;
+
+  transform: scale(3);
+
+  color: white;
+
+  pointer-events: none;
+
+  animation: floatEffect 6s ease-in-out infinite;
+}
+
