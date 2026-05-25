@@ -7,6 +7,10 @@ import ForecastChart from "../ForecastChart";
 import ReactAnimatedWeather from "react-animated-weather";
 import Footer from "../footer.jsx";
 import cloudsVideo from "./Videos/Clouds.mp4";
+import rainVideo from "./Videos/Rain.mp4";
+import sunnyVideo from "./Videos/Sunny.mp4";
+import nightVideo from "./Videos/Night.mp4";
+
 
 
 function App() {
@@ -117,10 +121,31 @@ function App() {
     return Math.round((celsius * 9) / 5 + 32);
   }
 
+function getBackgroundVideo() {
+  if (!weather) return cloudsVideo;
+
+  const condition = weather.condition.toLowerCase();
+
+  if (condition.includes("rain")) {
+    return rainVideo;
+  }
+
+  if (condition.includes("clear")) {
+    return sunnyVideo;
+  }
+
+  if (condition.includes("cloud")) {
+    return cloudsVideo;
+  }
+
+  return nightVideo;
+}
+
+
   return (
     <div className="container">
       <video
-        src={cloudsVideo}
+       src={getBackgroundVideo()}
         className="video-cover"
         autoPlay
         muted
