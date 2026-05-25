@@ -42,18 +42,20 @@ function App() {
    return;
  }
 
+setWeather({
+  temperature: data.main.temp,
+  condition: data.weather[0].description,
+  city: data.name,
+  humidity: data.main.humidity,
+  wind: data.wind.speed,
+  feelsLike: data.main.feels_like,
+  time: data.dt,
+  icon: data.weather[0].icon,
 
-     setWeather({
-       temperature: data.main.temp,
-       condition: data.weather[0].description,
-       city: data.name,
-       humidity: data.main.humidity,
-       wind: data.wind.speed,
-       feelsLike: data.main.feels_like,
-       time: data.dt,
-       icon: data.weather[0].icon,
-     });
-
+  sunrise: data.sys.sunrise,
+  sunset: data.sys.sunset,
+});
+    
      getForecast(data.coord.lat, data.coord.lon).then((forecastData) => {
       setForecast(
         forecastData.daily.time.map((day, index) => ({
@@ -80,16 +82,19 @@ function App() {
       )
         .then((response) => response.json())
         .then((data) => {
-          setWeather({
-            temperature: data.main.temp,
-            condition: data.weather[0].description,
-            city: data.name,
-            humidity: data.main.humidity,
-            wind: data.wind.speed,
-            feelsLike: data.main.feels_like,
-            time: data.dt,
-            icon: data.weather[0].icon,
-          });
+         setWeather({
+           temperature: data.main.temp,
+           condition: data.weather[0].description,
+           city: data.name,
+           humidity: data.main.humidity,
+           wind: data.wind.speed,
+           feelsLike: data.main.feels_like,
+           time: data.dt,
+           icon: data.weather[0].icon,
+
+           sunrise: data.sys.sunrise,
+           sunset: data.sys.sunset,
+         });
 
           return getForecast(lat, lon);
         })

@@ -58,6 +58,16 @@ function WeatherCard({ weather, toFahrenheit, formatTime, getDay }) {
 
     return "linear-gradient(to right, #3b82f6, #1d4ed8)";
   }
+function formatSunTime(timestamp) {
+  const date = new Date(timestamp * 1000);
+
+  return date.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+
 
   return (
     <div
@@ -87,6 +97,18 @@ function WeatherCard({ weather, toFahrenheit, formatTime, getDay }) {
       </div>
 
       <p className="time">🕒 {formatTime(weather.time)}</p>
+      
+      <div className="sun-times">
+        <div className="sun-box sunrise">
+          🌅 Sunrise
+          <span>{formatSunTime(weather.sunrise)}</span>
+        </div>
+
+        <div className="sun-box sunset">
+          🌇 Sunset
+          <span>{formatSunTime(weather.sunset)}</span>
+        </div>
+      </div>
     </div>
   );
 }
