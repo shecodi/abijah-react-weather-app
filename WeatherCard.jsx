@@ -12,6 +12,7 @@ function getAnimatedIcon(condition) {
   if (text.includes("clear")) return "CLEAR_DAY";
   if (text.includes("snow")) return "SNOW";
   if (text.includes("thunder")) return "WIND";
+if (text.includes("frost")) return "FROST";
 
   return "PARTLY_CLOUDY_DAY";
 }

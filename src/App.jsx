@@ -3,8 +3,10 @@ import "./App.css";
 import WeatherCard from "../WeatherCard";
 import Forecast from "../Forecast";
 import { searchWeather, getForecast } from "../weatherService";
-
-
+import ForecastChart from "../ForecastChart";
+import ReactAnimatedWeather from "react-animated-weather";
+import Footer from "../footer.jsx";
+import cloudsVideo from "./Videos/Clouds.mp4";
 
 
 function App() {
@@ -30,6 +32,12 @@ function App() {
         setLoading(false);
         return;
       }
+
+ if (!data.main) {
+   alert("Weather failed to load");
+   return;
+ }
+
 
      setWeather({
        temperature: data.main.temp,
@@ -57,9 +65,47 @@ function App() {
     });
   }
 
-  // ✅ Default city
   useEffect(() => {
-    handleSearch("Pretoria");
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=efa9d0bfea1a536aaa9c77e4bedcbb45&units=metric`,
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setWeather({
+            temperature: data.main.temp,
+            condition: data.weather[0].description,
+            city: data.name,
+            humidity: data.main.humidity,
+            wind: data.wind.speed,
+            feelsLike: data.main.feels_like,
+            time: data.dt,
+            icon: data.weather[0].icon,
+          });
+
+          return getForecast(lat, lon);
+        })
+
+        .then((forecastData) => {
+          setForecast(
+            forecastData.daily.time.map((day, index) => ({
+              day: day,
+              max: forecastData.daily.temperature_2m_max[index],
+              min: forecastData.daily.temperature_2m_min[index],
+              code: forecastData.daily.weathercode[index],
+            })),
+          );
+        });
+      },
+
+      () => {
+        handleSearch("Pretoria");
+      },
+    );
   }, []);
 
   function formatTime(timestamp) {
@@ -73,30 +119,41 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Weather App</h1>
+      <video
+        src={cloudsVideo}
+        className="video-cover"
+        autoPlay
+        muted
+        loop
+      ></video>
 
-      <input
-        type="text"
-        placeholder="Enter city..."
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-      />
+      <div className="content-video">
+        <h2>Weather Forecast</h2>
 
-      <button onClick={() => handleSearch()}>Search Weather</button>
-
-      {loading && <div className="spinner"></div>}
-
-      {weather && (
-        
-        <WeatherCard
-          weather={weather}
-          toFahrenheit={toFahrenheit}
-          formatTime={formatTime}
-          getDay={getDay}
+        <input
+          type="text"
+          placeholder="Enter city..."
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
         />
-      )}
 
-      {forecast.length > 0 && <Forecast data={forecast} />}
+        <button onClick={() => handleSearch()}>Search Weather</button>
+
+        {loading && <div className="spinner"></div>}
+
+        {weather && (
+          <WeatherCard
+            weather={weather}
+            toFahrenheit={toFahrenheit}
+            formatTime={formatTime}
+            getDay={getDay}
+          />
+        )}
+
+        {forecast.length > 0 && <Forecast data={forecast} />}
+        {forecast.length > 0 && <ForecastChart data={forecast} />}
+        <Footer />
+      </div>
     </div>
   );
 }
