@@ -157,23 +157,21 @@ function getBackgroundVideo() {
         loop
       ></video>
 
-
-
       <div className="content-video">
         <h2>Weather Forecast</h2>
 
-        <input
-          type="text"
-          placeholder="Enter city..."
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Enter city..."
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
 
-        <button onClick={() => handleSearch()}>Search Weather</button>
+          <button onClick={() => handleSearch()}>Search Weather</button>
+        </div>
 
         {loading && <div className="spinner"></div>}
-
-        
 
         {weather && (
           <WeatherCard

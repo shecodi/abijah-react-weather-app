@@ -1,8 +1,14 @@
+.card {
+  position: relative;
+  overflow: hidden;
+
+  transition: 1s ease;
+}
 
 .weather-icon {
   display: flex;
   justify-content: center;
-  margin: 10px 0;
+  margin: 5px 0;
   color: white;
 
   animation: floatIcon 3s ease-in-out infinite;
@@ -24,8 +30,8 @@
 
 .weather-effect {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
 
   opacity: 0.15;
 
@@ -36,14 +42,16 @@
   pointer-events: none;
 
   animation: floatEffect 6s ease-in-out infinite;
+  mix-blend-mode: screen;
+
 }
 
 .sun-times {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
 
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .sun-box {
@@ -72,7 +80,7 @@
 .sun-box span {
   margin-top: 6px;
 
-  font-size: 18px;
+  font-size: 8px;
 
   font-weight: bold;
 }
@@ -83,4 +91,18 @@
 
 .sunset {
   border: 1px solid rgba(255, 120, 0, 0.5);
+}
+
+@keyframes floatEffect {
+  0% {
+    transform: scale(3) translateY(0px);
+  }
+
+  50% {
+    transform: scale(3) translateY(-10px);
+  }
+
+  100% {
+    transform: scale(3) translateY(0px);
+  }
 }
