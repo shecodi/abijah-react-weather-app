@@ -13,15 +13,13 @@
 .forecast-card {
   flex: 1;
 
-   min-width: 30px;
+ min-width: 65px;
+max-width: 80px;
 
-  max-width: 35px;
-
-  padding: 3px 2px;
-
+padding: 8px 4px;
   border-radius: 16px;
 
-  font-size: 8px;
+  font-size: 11px;
   text-align: center;
 
   background: rgba(255,255,255,0.12);
@@ -39,12 +37,12 @@
 .forecast-day {
   color: blue;
   font-weight: bold;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .forecast-temp {
    color: blue;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: bold;
   margin: 10px 0;
 }
@@ -54,7 +52,7 @@
 }
 
 .forecast-icon {
-  font-size: 20px;
+  font-size: 24px;
   margin: 5px 0;
 }
 
@@ -66,7 +64,8 @@
 
 .forecast-card {
   background: rgba(255,255,255,0.15);
-
+ font-size: 12px;
+  font-weight: bold;
   padding: 5px;
 
   border-radius: 10px;
@@ -75,6 +74,6 @@
 
   text-align: center;
 
-  color: white;
+  color: rgb(77, 76, 76);
 }
 

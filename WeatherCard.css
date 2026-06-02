@@ -1,9 +1,12 @@
  .card {
-  width:50%;
-height: 50%;
-  padding: 10px 8px;
+ .card {
+  width: 420px;
+  min-height: 260px;
 
-  border-radius: 15px;
+  padding: 15px;
+
+  border-radius: 20px;
+}
 
   margin: 15px auto;
 
@@ -96,4 +99,11 @@ height: 50%;
 
 .condition {
   font-size: 0.8rem;
+}
+
+.sun-times {
+ max-width : 300px ;
+ margin-left: 2rem;
+ margin-right : 2rem ;
+   
 }
