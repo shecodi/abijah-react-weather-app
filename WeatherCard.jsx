@@ -121,17 +121,8 @@ function isNight() {
 
       <p className="time">🕒 {formatTime(weather.time)}</p>
 
-      <div className="sun-times">
-        <div className="sun-box sunrise">
-          🌅 Sunrise
-          <span>{formatSunTime(weather.sunrise)}</span>
-        </div>
-
-        <div className="sun-box sunset">
-          🌇 Sunset
-          <span>{formatSunTime(weather.sunset)}</span>
-        </div>
-      </div>
+    
+     
     </div>
   );
 }
